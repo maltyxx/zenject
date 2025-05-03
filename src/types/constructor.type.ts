@@ -12,8 +12,8 @@
  * function createInstance<T>(ctor: Constructor<T>): T {
  *   return new ctor();
  * }
- * 
+ *
  * // Using Constructor as a variable type
  * const userClass: Constructor<User> = User;
  */
-export type Constructor<T = unknown> = new (...args: unknown[]) => T; 
+export type Constructor<T = unknown> = new (...args: unknown[]) => T;

@@ -1,26 +1,26 @@
-import type { Constructor } from './constructor.type';
-import type { Token } from './token.type';
+import type { Constructor } from "./constructor.type";
+import type { Token } from "./token.type";
 
 /**
  * Provider definition for dependency injection.
  * Allows various ways to register services in the container.
- * 
+ *
  * @interface Provider
  * @template T The type provided by this provider
- * 
+ *
  * @example
  * // Class provider - standard way to register a service
- * const classProvider: ClassProvider<UserService> = { 
- *   provide: UserService, 
- *   useClass: UserServiceImpl 
+ * const classProvider: ClassProvider<UserService> = {
+ *   provide: UserService,
+ *   useClass: UserServiceImpl
  * };
- * 
+ *
  * // Value provider - register a static value
- * const valueProvider: ValueProvider<string> = { 
- *   provide: 'API_KEY', 
- *   useValue: 'abc123' 
+ * const valueProvider: ValueProvider<string> = {
+ *   provide: 'API_KEY',
+ *   useValue: 'abc123'
  * };
- * 
+ *
  * // Factory provider - create instances with custom logic
  * const factoryProvider: FactoryProvider<DbConnection> = {
  *   provide: DbConnection,
@@ -76,9 +76,9 @@ export interface ExistingProvider<T = any> {
 /**
  * Union type of all provider types.
  */
-export type Provider<T = any> = 
+export type Provider<T = any> =
   | Constructor<T>
-  | ClassProvider<T> 
-  | ValueProvider<T> 
+  | ClassProvider<T>
+  | ValueProvider<T>
   | FactoryProvider<T>
-  | ExistingProvider<T>; 
+  | ExistingProvider<T>;
