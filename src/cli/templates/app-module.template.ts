@@ -11,12 +11,16 @@ import { appConfig } from "./config";
   ],
   providers: [
     // Register the app configuration
-    { provide: APP_CONFIG, useValue: appConfig }
-    
+    { provide: APP_CONFIG, useValue: appConfig },
+
     // Add your global services here
   ],
   exports: [
     // Export services for external use
-  ]
+  ],
 })
-export class ${CLASS_NAME} {} 
+export class $ {
+  CLASS_NAME;
+}
+{
+}
