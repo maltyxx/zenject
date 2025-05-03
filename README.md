@@ -4,13 +4,39 @@
 
 A lightweight dependency injection framework for Bun.js and TypeScript applications.
 
-## Features
+## 🚀 Features at a Glance
 
-- 🚀 **Lightweight and Fast**: Minimal runtime overhead
-- 🧩 **Module-Based Architecture**: Inspired by Angular/NestJS-style DI, but fully modular and framework-agnostic
-- 🔄 **Lifecycle Hooks**: Support for `onInit` and `onDestroy`
-- 🧠 **Lazy Loading**: Modules are initialized on demand
-- 📦 **Clean TypeScript Support**: Full type safety
+### ⚡️ **Minimal & Performant**
+
+Built on top of [`tsyringe`](https://github.com/microsoft/tsyringe) and [Bun.js](https://bun.sh), Zenject has **zero reflection overhead**, **no global metadata**, and a **fully synchronous resolution pipeline**.
+
+### 🧩 **Modular Architecture**
+
+Inspired by NestJS/Angular — but without the complexity. Use clean `@Module()` declarations with optional `imports` and `providers`.
+
+### 🌀 **Lazy Loading by Default**
+
+Modules are **registered only when explicitly loaded**, reducing memory usage and improving startup times — especially in CLI tools, microservices or event-driven apps.
+
+### 🔁 **Lifecycle Hooks**
+
+Built-in support for `onInit()` and `onDestroy()` lifecycle methods (sync or async), allowing clean startup/shutdown logic for any service.
+
+### 🧠 **Fully Type-Safe**
+
+Written in TypeScript from the ground up. All decorators and DI utilities are strongly typed. No `any`, no magic, no compromises.
+
+### 📦 **Bun Workspace Friendly**
+
+Designed for Bun monorepos using `workspaces`. Perfect for apps split into `packages/streamr`, `packages/logger`, `packages/core`, etc.
+
+### 🧪 **Testable by Design**
+
+Override any dependency using `AppContainer.registerInstance()` or custom test containers. Lifecycle is deterministic and isolated.
+
+### 🧱 **POO & SOLID Principles First**
+
+Supports clean separation of concerns, reusable services, and DI without decorators bloat — ideal for domain-driven design.
 
 ## Installation
 
