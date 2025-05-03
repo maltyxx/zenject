@@ -23,5 +23,13 @@ export * from "./plugins/plugin-manager";
 export * from "./tokens/injection-token";
 export * from "./tokens/common-tokens";
 
+// Testing utilities
+export * from "./testing/testing";
+
 // Re-export injectable decorator from tsyringe for convenience
 export { injectable, inject, singleton } from "tsyringe";
+
+// Export all interfaces and types for better developer experience
+export * from "./types/scope.enum";
+export * from "./interfaces/plugin.interface";
+export * from "./utils/type-helpers";
