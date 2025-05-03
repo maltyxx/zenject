@@ -1,5 +1,6 @@
-import type { Constructor } from './constructor.type';
-import type { Provider } from './provider.interface';
+import type { Constructor } from "./constructor.type";
+import type { DynamicModule } from "./dynamic-module.interface";
+import type { Provider } from "./provider.interface";
 
 /**
  * Configuration options for a module decorator.
@@ -14,12 +15,12 @@ import type { Provider } from './provider.interface';
  *   providers: [UserService, AuthService],
  *   exports: [UserService]
  * };
- * 
+ *
  * // Using with the Module decorator
  * @Module({
  *   imports: [CommonModule],
  *   providers: [
- *     UserService, 
+ *     UserService,
  *     { provide: 'API_URL', useValue: 'https://api.example.com' }
  *   ],
  *   exports: [UserService]
@@ -28,9 +29,9 @@ import type { Provider } from './provider.interface';
  */
 export interface ModuleOptions {
   /** Modules to import */
-  imports?: Constructor[];
+  imports?: (Constructor | DynamicModule)[];
   /** Service providers to register */
   providers?: Provider[];
   /** Providers to export (make available to importing modules) */
   exports?: Provider[];
-} 
+}
