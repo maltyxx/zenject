@@ -1,0 +1,15 @@
+{
+  "source": {
+    "include": ["src"],
+    "includePattern": "\\.(ts|tsx)$"
+  },
+  "plugins": ["node_modules/jsdoc/plugins/markdown"],
+  "opts": {
+    "destination": "./docs",
+    "recurse": true
+  },
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+  }
+} 
