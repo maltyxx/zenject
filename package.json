@@ -3,29 +3,52 @@
   "version": "1.0.0",
   "description": "A lightweight dependency injection framework for Bun.js applications",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./testing": "./src/testing/index.ts",
-    "./tokens": "./src/tokens/common-tokens.ts",
-    "./cli": "./src/cli/index.ts"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./testing": {
+      "import": "./dist/testing/index.js",
+      "types": "./dist/testing/index.d.ts"
+    },
+    "./tokens": {
+      "import": "./dist/tokens/common-tokens.js",
+      "types": "./dist/tokens/common-tokens.d.ts"
+    },
+    "./cli": {
+      "import": "./dist/cli/index.js",
+      "types": "./dist/cli/index.d.ts"
+    },
+    "./package.json": "./package.json"
   },
   "bin": {
-    "zenject": "./src/cli/index.ts"
+    "zenject": "./dist/cli/index.js"
   },
-  "types": "src/index.ts",
+  "files": ["dist", "README.md", "LICENSE"],
   "scripts": {
+    "build": "bun build ./src/index.ts --outdir ./dist --target node --minify",
+    "dev": "bun build ./src/index.ts --outdir ./dist --target node --watch",
     "docs": "typedoc --options typedoc.json",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
-    "prepare": "chmod +x ./src/cli/index.ts"
+    "benchmark": "bun run benchmarks/index.ts",
+    "benchmark:nest": "bun run benchmarks/nest-comparison.ts",
+    "benchmark:all": "bun run benchmark && bun run benchmark:nest",
+    "prepare": "chmod +x ./src/cli/index.ts && bun run build",
+    "postinstall": "chmod +x ./dist/cli/index.js"
   },
   "keywords": [
     "bun",
     "dependency-injection",
     "di",
     "ioc",
-    "typescript"
+    "typescript",
+    "container",
+    "inversion-of-control"
   ],
   "author": "Yoann Vanitou",
   "license": "MIT",
@@ -43,5 +66,6 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "sideEffects": false
 }

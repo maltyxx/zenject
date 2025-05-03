@@ -9,4 +9,4 @@
   "readme": "README.md",
   "plugin": ["typedoc-plugin-markdown"],
   "theme": "default"
-} 
+}
