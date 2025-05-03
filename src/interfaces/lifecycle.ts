@@ -35,7 +35,11 @@ export interface OnDestroy {
  * @returns {boolean} True if the object implements OnInit
  */
 export function isOnInit(obj: unknown): obj is OnInit {
-  return obj !== null && obj !== undefined && typeof (obj as Record<string, unknown>).onInit === "function";
+  return (
+    obj !== null &&
+    obj !== undefined &&
+    typeof (obj as Record<string, unknown>).onInit === "function"
+  );
 }
 
 /**
@@ -44,7 +48,11 @@ export function isOnInit(obj: unknown): obj is OnInit {
  * @returns {boolean} True if the object implements OnDestroy
  */
 export function isOnDestroy(obj: unknown): obj is OnDestroy {
-  return obj !== null && obj !== undefined && typeof (obj as Record<string, unknown>).onDestroy === "function";
+  return (
+    obj !== null &&
+    obj !== undefined &&
+    typeof (obj as Record<string, unknown>).onDestroy === "function"
+  );
 }
 
 /**
