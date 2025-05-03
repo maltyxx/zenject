@@ -27,7 +27,7 @@
     "ioc",
     "typescript"
   ],
-  "author": "maltyxx",
+  "author": "Yoann Vanitou",
   "license": "MIT",
   "engines": {
     "bun": ">=1.0.0"
