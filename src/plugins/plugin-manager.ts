@@ -3,9 +3,22 @@ import type { Constructor } from "../types/constructor.type";
 import type { DynamicModule } from "../types/dynamic-module.interface";
 
 /**
+ * Type for a module that could be a Constructor or DynamicModule
+ */
+type ModuleType = Constructor | DynamicModule;
+
+/**
+ * Type for a module import that could have default or named exports
+ */
+type ModuleImport = {
+  default?: ModuleType;
+  [key: string]: ModuleType | undefined;
+};
+
+/**
  * Registry of available plugins.
  */
-const pluginRegistry = new Map<string, () => Promise<{ default: Constructor | DynamicModule }>>();
+const pluginRegistry = new Map<string, () => Promise<ModuleImport>>();
 
 /**
  * Registry of loaded plugins
@@ -19,20 +32,20 @@ const loadedPlugins = new Set<string>();
 export class PluginManager {
   /**
    * Register a plugin for later use
-   * 
+   *
    * @param name Plugin name
    * @param loader Function that loads the plugin module
    */
   public static register(
-    name: string, 
-    loader: () => Promise<{ default: Constructor | DynamicModule }>
+    name: string,
+    loader: () => Promise<ModuleImport>,
   ): void {
     pluginRegistry.set(name, loader);
   }
 
   /**
    * Check if a plugin is registered
-   * 
+   *
    * @param name Plugin name
    * @returns True if the plugin is registered
    */
@@ -42,7 +55,7 @@ export class PluginManager {
 
   /**
    * Check if a plugin is loaded
-   * 
+   *
    * @param name Plugin name
    * @returns True if the plugin is loaded
    */
@@ -52,11 +65,11 @@ export class PluginManager {
 
   /**
    * Load a plugin by name
-   * 
+   *
    * @param name Plugin name
    * @returns A promise that resolves when the plugin is loaded
    * @throws Error if the plugin is not registered
-   * 
+   *
    * @example
    * // Load a plugin
    * await PluginManager.load('redis');
@@ -71,14 +84,24 @@ export class PluginManager {
       throw new Error(`Plugin '${name}' is not registered`);
     }
 
-    const module = await loader();
-    loadModule(module.default);
+    const moduleImport = await loader();
+
+    // Try to get the module from default export first, then from first named export
+    const moduleToLoad =
+      moduleImport.default ||
+      Object.values(moduleImport).find((value) => value !== undefined);
+
+    if (!moduleToLoad) {
+      throw new Error(`Plugin '${name}' did not export any modules`);
+    }
+
+    await loadModule(moduleToLoad);
     loadedPlugins.add(name);
   }
 
   /**
    * Get list of registered plugin names
-   * 
+   *
    * @returns Array of plugin names
    */
   public static getRegisteredPlugins(): string[] {
@@ -87,10 +110,10 @@ export class PluginManager {
 
   /**
    * Get list of loaded plugin names
-   * 
+   *
    * @returns Array of plugin names
    */
   public static getLoadedPlugins(): string[] {
     return Array.from(loadedPlugins);
   }
-} 
+}
