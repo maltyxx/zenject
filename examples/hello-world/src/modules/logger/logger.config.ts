@@ -6,7 +6,7 @@ export const loggerConfig: LoggerOptions = {
   transport:
     env.LOG_FORMAT === "pretty"
       ? {
-          target: "pino-pretty",
+          target: import.meta.resolveSync("pino-pretty"),
           options: {
             colorize: true,
           },
