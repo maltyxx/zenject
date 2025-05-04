@@ -4,7 +4,7 @@ import { createTestingContainer, createMock } from "@maltyxx/zenject/testing";
 import { AppLifecycle } from "@maltyxx/zenject";
 
 describe("${CLASS_NAME}", () => {
-  let service: ${CLASS_NAME};
+  let service: $CLASS_NAME;
   let testContainer;
 
   // Example of mocking a dependency

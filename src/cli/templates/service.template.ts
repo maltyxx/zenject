@@ -1,32 +1,29 @@
+import { OnDestroy, OnInit } from "@maltyxx/zenject";
 import { injectable } from "tsyringe";
-import { OnInit, OnDestroy } from "@maltyxx/zenject";
 
 /**
  * Service for ${SERVICE_NAME} operations
  */
 @injectable()
 export class ${CLASS_NAME} implements OnInit, OnDestroy {
-  constructor() {}
+  constructor() 
 
   /**
    * Lifecycle hook called after instantiation
    */
-  async onInit(): Promise<void> {
+  async onInit(): Promise<void> 
     console.log('${CLASS_NAME} initialized');
-  }
 
   /**
    * Lifecycle hook called before destruction
    */
-  async onDestroy(): Promise<void> {
+  async onDestroy(): Promise<void> 
     console.log('${CLASS_NAME} destroyed');
-  }
 
   /**
    * Example method
    * @returns A sample result
    */
-  getSampleData(): string {
+  getSampleData(): string 
     return '${SERVICE_NAME} data';
-  }
 } 

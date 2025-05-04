@@ -10,7 +10,7 @@ export const appConfig = {
   /**
    * Application port
    */
-  port: parseInt(process.env.${APP_NAME}_PORT || '3000', 10),
+  port: Number.parseInt(process.env.${APP_NAME}_PORT || '3000', 10),
   
   /**
    * Application host

@@ -4,6 +4,7 @@
  */
 
 // Core
+export * from "./zenject";
 export * from "./container";
 export * from "./decorators/module";
 export * from "./interfaces/lifecycle";

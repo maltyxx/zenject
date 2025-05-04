@@ -1,6 +1,6 @@
 import { AppContainer } from "../container";
-import { callOnDestroy, isOnDestroy } from "../interfaces/lifecycle";
 import { getLoadedModules } from "../decorators/module";
+import { callOnDestroy, isOnDestroy } from "../interfaces/lifecycle";
 
 /**
  * Registry of instances registered with the lifecycle manager

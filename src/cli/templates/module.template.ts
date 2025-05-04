@@ -14,12 +14,10 @@ export class ${CLASS_NAME} {
    * @param options Configuration options
    * @returns A configured module
    */
-  static forRoot(options: Record<string, unknown>) {
+  static forRoot(options: Record<string, unknown>) 
     return {
       module: ${CLASS_NAME},
-      providers: [
-        { provide: '${MODULE_NAME.toUpperCase()}_OPTIONS', useValue: options }
-      ]
-    };
+      providers: [provide: '${MODULE_NAME.toUpperCase()}_OPTIONS', useValue: options 
+      ];
   }
 } 

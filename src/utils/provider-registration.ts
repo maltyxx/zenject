@@ -1,11 +1,11 @@
 import { AppContainer } from "../container";
 import { callOnInit } from "../interfaces/lifecycle";
 import type {
-  Provider,
   ClassProvider,
-  ValueProvider,
-  FactoryProvider,
   ExistingProvider,
+  FactoryProvider,
+  Provider,
+  ValueProvider,
 } from "../types/provider.interface";
 
 /**

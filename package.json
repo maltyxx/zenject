@@ -32,14 +32,15 @@
   "scripts": {
     "build": "bun build ./src/index.ts --outdir ./dist --target node --minify",
     "dev": "bun build ./src/index.ts --outdir ./dist --target node --watch",
-    "docs": "typedoc --options typedoc.json",
     "test": "bun test",
+    "test:watch": "bun test --watch",
+    "test:cov": "bun test --coverage",
     "typecheck": "tsc --noEmit",
-    "benchmark": "bun run benchmarks/index.ts",
-    "benchmark:nest": "bun run benchmarks/nest-comparison.ts",
-    "benchmark:all": "bun run benchmark && bun run benchmark:nest",
     "prepare": "chmod +x ./src/cli/index.ts && bun run build",
-    "postinstall": "chmod +x ./dist/cli/index.js"
+    "postinstall": "chmod +x ./dist/cli/index.js",
+    "lint": "biome check src benchmarks examples",
+    "lint:fix": "biome check --apply src benchmarks examples",
+    "format": "biome format --write --verbose src benchmarks examples"
   },
   "keywords": [
     "bun",
@@ -60,12 +61,13 @@
     "tsyringe": "^4.8.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/bun": "^1.2.10",
     "typedoc": "^0.28.3",
     "typedoc-plugin-markdown": "^4.0.0-next.36",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  },
-  "sideEffects": false
+  }
 }

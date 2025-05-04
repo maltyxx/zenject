@@ -2,7 +2,7 @@
  * Type helpers for Zenject
  */
 
-import { type DependencyContainer } from "tsyringe";
+import type { DependencyContainer } from "tsyringe";
 import type { Token } from "../types/token.type";
 
 /**

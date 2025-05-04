@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
-import { parseArgs } from "util";
 import { join, resolve } from "path";
+import { parseArgs } from "util";
 import { mkdir } from "fs/promises";
 
 const TEMPLATE_DIR = join(import.meta.dir, "templates");
@@ -80,7 +80,7 @@ Examples:
  */
 async function main() {
   try {
-    // Utiliser parseArgs avec Bun.argv - recommandé par la doc Bun
+    // Use parseArgs with Bun.argv - recommended by Bun docs
     const { positionals, values } = parseArgs({
       args: Bun.argv.slice(2),
       allowPositionals: true,
@@ -159,7 +159,7 @@ async function safeWriteFile(
  */
 async function makeDirectory(dir: string): Promise<void> {
   try {
-    // Utiliser Bun Shell pour créer le répertoire
+    // Use Bun Shell to create the directory
     // Wrapped in try/catch for Windows compatibility
     await Bun.$`mkdir -p ${dir}`;
   } catch (err) {
@@ -359,7 +359,7 @@ async function generateApp(
 async function getTemplate(templateName: string): Promise<string> {
   const path = join(TEMPLATE_DIR, templateName);
   try {
-    // Utiliser Bun.file pour lire le template
+    // Use Bun.file to read the template
     return await Bun.file(path).text();
   } catch (err) {
     throw new Error(`Template not found: ${templateName}`);

@@ -108,15 +108,15 @@ import { OnInit, OnDestroy } from '@maltyxx/zenject';
   providers: [ConfigService]
 })
 class AppModule {
-  constructor(private configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) {}
 }
 
 class ConfigService implements OnInit, OnDestroy {
-  onInit() {
+  public onInit() {
     console.log('ConfigService initialized');
   }
 
-  onDestroy() {
+  public onDestroy() {
     console.log('ConfigService destroyed');
   }
 }
