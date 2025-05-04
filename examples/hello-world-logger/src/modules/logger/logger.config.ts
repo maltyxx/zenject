@@ -2,13 +2,14 @@ import { env } from "bun";
 import type { LoggerOptions } from "pino";
 
 export const loggerConfig: LoggerOptions = {
-  level: env.LOG_LEVEL ?? "info",
+  level: env.LOGGER_LEVEL ?? "info",
   transport:
-    env.LOG_FORMAT === "pretty"
+    env.LOGGER_FORMAT === "pretty"
       ? {
-          target: import.meta.resolveSync("pino-pretty"),
+          target: import.meta.resolve("pino-pretty"),
           options: {
             colorize: true,
+            messageFormat: '[{context}] {msg}',
           },
         }
       : undefined,
