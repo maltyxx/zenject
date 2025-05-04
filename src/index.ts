@@ -7,6 +7,7 @@
 export * from "./zenject";
 export * from "./container";
 export * from "./decorators/module";
+export * from "./decorators/injection-helpers";
 export * from "./interfaces/lifecycle";
 export * from "./types/constructor.type";
 export * from "./types/module-options.interface";

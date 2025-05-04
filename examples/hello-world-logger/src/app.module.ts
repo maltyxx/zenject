@@ -1,4 +1,4 @@
-import { Module } from "../../../src";
+import { Module } from "@maltyxx/zenject";
 import { AppService } from "./app.service";
 import { LoggerModule } from "./modules/logger/logger.module";
 

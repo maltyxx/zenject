@@ -9,7 +9,7 @@ export const loggerConfig: LoggerOptions = {
           target: import.meta.resolve("pino-pretty"),
           options: {
             colorize: true,
-            messageFormat: '[{context}] {msg}',
+            messageFormat: "[{context}] {msg}",
           },
         }
       : undefined,

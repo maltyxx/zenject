@@ -1,4 +1,4 @@
-import { injectable } from "../../../src";
+import { injectable } from "@maltyxx/zenject";
 import { InjectLogger, type Logger } from "./modules/logger";
 
 @injectable()
