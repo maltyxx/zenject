@@ -50,7 +50,7 @@ bun run main.ts
 
 ```ts
 export class HelloService {
-  helloWorld(): string {
+  public helloWorld(): string {
     return "Hello World 👋";
   }
 }
@@ -75,8 +75,9 @@ import { HelloService } from "./hello.service";
 
 const app = new Zenject(HelloModule);
 
-await app.bootstrap(() => {
-  console.log(app.resolve(HelloService).helloWorld());
+app.bootstrap(() => {
+  const service = app.resolve(HelloService);
+  console.log(service.helloWorld());
 });
 ```
 
