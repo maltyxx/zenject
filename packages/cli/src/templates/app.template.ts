@@ -1,6 +1,6 @@
-import { loadModule, AppContainer, AppLifecycle } from "@maltyxx/zenject";
+import { AppContainer, AppLifecycle } from "@zenject/core";
 import { ${CLASS_NAME}Module } from "./${APP_NAME}.module";
-import { APP_CONFIG } from "@maltyxx/zenject/tokens";
+import { APP_CONFIG } from "@zenject/core/tokens";
 
 /**
  * Main application class for ${APP_NAME}

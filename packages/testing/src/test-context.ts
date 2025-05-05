@@ -1,9 +1,7 @@
 import "reflect-metadata";
-import type { DependencyContainer } from "tsyringe";
-import { overrideInjectionContainerForTest } from "../decorators/injection-helpers";
-import type { Constructor } from "../types/constructor.type";
-import type { Token } from "../types/token.type";
-import { Zenject } from "../zenject";
+
+import type { Constructor, DependencyContainer, Token } from "@zenject/core";
+import { Zenject, overrideInjectionContainerForTest } from "@zenject/core";
 import { createTestingContainer } from "./testing";
 
 type Override<T = unknown> = {

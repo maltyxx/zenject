@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, mock, test } from "bun:test";
-import { createTestContext } from "@maltyxx/zenject/testing";
+import { createTestContext } from "@zenject/testing";
+import { LOGGER_LOGGER_TOKEN, type Logger } from "@zenject/logger";
 import { AppService } from "./app.service";
-import { LOGGER_LOGGER_TOKEN } from "./modules/logger/constants";
-import type { Logger } from "./modules/logger/logger.interface";
 
 describe("AppService", () => {
   let appService: AppService;
@@ -19,9 +18,7 @@ describe("AppService", () => {
 
     const { resolve } = await createTestContext({
       providers: [AppService],
-      overrides: [
-        { provide: LOGGER_LOGGER_TOKEN, useValue: loggerMock }
-      ],
+      overrides: [{ provide: LOGGER_LOGGER_TOKEN, useValue: loggerMock }],
     });
 
     appService = resolve(AppService);

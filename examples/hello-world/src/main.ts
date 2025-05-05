@@ -1,4 +1,4 @@
-import { Zenject } from "@maltyxx/zenject";
+import { Zenject } from "@zenject/core";
 import { AppModule } from "./app.module";
 import { AppService } from "./app.service";
 

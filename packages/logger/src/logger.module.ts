@@ -1,5 +1,5 @@
 import { type LoggerOptions, pino } from "pino";
-import { Module } from "../../../../../src";
+import { Module } from "@zenject/core";
 import { LOGGER_CONFIG_TOKEN, LOGGER_LOGGER_TOKEN } from "./constants";
 import { loggerConfig } from "./logger.config";
 

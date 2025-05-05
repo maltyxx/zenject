@@ -26,6 +26,17 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+
+    "paths": {
+      "@zenject/core": ["./packages/core/src"],
+      "@zenject/core/*": ["./packages/core/src/*"],
+      "@zenject/logger": ["./packages/logger/src"],
+      "@zenject/logger/*": ["./packages/logger/src/*"],
+      "@zenject/cli": ["./packages/cli/src"],
+      "@zenject/cli/*": ["./packages/cli/src/*"],
+      "@zenject/testing": ["./packages/testing/src"],
+      "@zenject/testing/*": ["./packages/testing/src/*"]
+    }
   }
 }

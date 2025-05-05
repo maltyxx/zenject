@@ -1,5 +1,5 @@
-import { injectable } from "@maltyxx/zenject";
-import { InjectLogger, type Logger } from "./modules/logger";
+import { injectable } from "@zenject/core";
+import { InjectLogger, type Logger } from "@zenject/logger";
 
 @injectable()
 export class AppService {

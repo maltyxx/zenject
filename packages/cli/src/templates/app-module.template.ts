@@ -1,5 +1,4 @@
-import { Module } from "@maltyxx/zenject";
-import { APP_CONFIG } from "@maltyxx/zenject/tokens";
+import { Module, APP_CONFIG } from "@zenject/core";
 import { appConfig } from "./config";
 
 /**

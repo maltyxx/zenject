@@ -1,4 +1,4 @@
-import { Module } from "@maltyxx/zenject";
+import { Module } from "@zenject/core";
 
 /**
  * Module for ${MODULE_NAME}-related functionality.

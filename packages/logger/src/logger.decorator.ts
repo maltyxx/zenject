@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { createInjectionDecorator } from "@maltyxx/zenject";
+import { createInjectionDecorator } from "@zenject/core";
 import { LOGGER_LOGGER_TOKEN } from "./constants";
 import type { Logger } from "./logger.interface";
 

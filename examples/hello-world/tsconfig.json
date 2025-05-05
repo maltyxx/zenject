@@ -29,8 +29,12 @@
     "noPropertyAccessFromIndexSignature": false,
 
     "paths": {
-      "@maltyxx/zenject": ["../../src"],
-      "@maltyxx/zenject/*": ["../../src/*"]
+      "@zenject/core": ["../../packages/core/src"],
+      "@zenject/core/*": ["../../packages/core/src/*"],
+      "@zenject/logger": ["../../packages/logger/src"],
+      "@zenject/logger/*": ["../../packages/logger/src/*"],
+      "@zenject/testing": ["../../packages/testing/src"],
+      "@zenject/testing/*": ["../../packages/testing/src/*"]
     }
   }
 }

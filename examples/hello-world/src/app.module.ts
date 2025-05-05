@@ -1,6 +1,6 @@
-import { Module } from "@maltyxx/zenject";
+import { Module } from "@zenject/core";
+import { LoggerModule } from "@zenject/logger";
 import { AppService } from "./app.service";
-import { LoggerModule } from "./modules/logger/logger.module";
 
 @Module({
   imports: [LoggerModule],

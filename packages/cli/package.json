@@ -1,0 +1,16 @@
+{
+  "name": "@zenject/cli",
+  "description": "A CLI for Zenject",
+  "type": "module",
+  "author": "Yoann Vanitou",
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "dependencies": {
+    "@zenject/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

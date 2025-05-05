@@ -1,0 +1,17 @@
+{
+  "name": "@zenject/core",
+  "description": "A core module for Zenject",
+  "type": "module",
+  "author": "Yoann Vanitou",
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.10.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

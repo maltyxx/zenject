@@ -1,6 +1,4 @@
-import { container } from "tsyringe";
-import type { DependencyContainer } from "tsyringe";
-import type { Token } from "../types/token.type";
+import { type DependencyContainer, type Token, container } from "@zenject/core";
 
 /**
  * Create a testing container with optional overrides

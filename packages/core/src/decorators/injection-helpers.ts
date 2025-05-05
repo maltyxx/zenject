@@ -4,7 +4,6 @@ import { AppContainer } from "../container";
 import type { Constructor } from "../types/constructor.type";
 import type { Token } from "../types/token.type";
 
-// Clé de métadonnée pour l'override du container
 export const INJECTION_CONTAINER_KEY = "__zenject_injection_container__";
 
 /**

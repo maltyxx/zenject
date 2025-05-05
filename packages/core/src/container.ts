@@ -1,6 +1,5 @@
 import { container } from "tsyringe";
 import type { DependencyContainer } from "tsyringe";
-// Import actual DependencyContainer implementation
 import { container as containerImpl } from "tsyringe";
 
 /**
