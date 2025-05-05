@@ -16,7 +16,7 @@
 | 🌀 **Lazy loading**       | Nothing is instantiated until `await app.bootstrap()` – ideal for **Lambda cold starts**.    |
 | 🔁 **Lifecycle hooks**    | `onInit()` / `onDestroy()` (sync or async) for graceful start/stop.                          |
 | 🧘 **Clean API**          | One object → `new Zenject(AppModule)`; one call → `await bootstrap()`.                       |
-| 🚀 **CLI‑ready**          | Scaffold templates with `bunx zenject new:module/service/app`.                               |
+| 🚀 **CLI‑ready**          | Scaffold templates with `bunx @zenject/cli new:module/service/app`.                          |
 | 🧩 **Microservice‑ready** | Each service or transport (HTTP, WS, cron, queue) is a module – monolith or distributed.     |
 | 🚫 **No build step**      | Run `.ts` files directly in Bun – no transpilation required.                                 |
 
@@ -27,7 +27,13 @@
 ### 1. Install
 
 ```bash
-bun add @maltyxx/zenject
+# Install the core package
+bun add @zenject/core
+
+# Optional packages
+bun add @zenject/logger # For logging functionality
+bun add @zenject/testing # For testing utilities
+bun add @zenject/cli # For CLI tools
 ````
 
 ### 2. Run Example
@@ -38,7 +44,7 @@ A minimal Hello World example is available in the repository:
 
 ```bash
 cd examples/hello-world
-bun run main.ts
+bun run src/main.ts
 # → Hello World 👋
 ```
 
@@ -59,7 +65,7 @@ export class HelloService {
 #### `hello.module.ts`
 
 ```ts
-import { Module } from "@maltyxx/zenject";
+import { Module } from "@zenject/core";
 import { HelloService } from "./hello.service";
 
 @Module({ providers: [HelloService] })
@@ -69,7 +75,7 @@ export class HelloModule {}
 #### `main.ts`
 
 ```ts
-import { Zenject } from "@maltyxx/zenject";
+import { Zenject } from "@zenject/core";
 import { HelloModule } from "./hello.module";
 import { HelloService } from "./hello.service";
 
@@ -97,10 +103,19 @@ app.bootstrap(() => {
 ## 🧪 Testing
 
 ```ts
-import { createTestingContainer } from "@maltyxx/zenject/testing";
+import { createTestContext } from "@zenject/testing";
+
+// Example test for a service with mocks
+const { resolve } = await createTestContext({
+  providers: [AppService],
+  overrides: [{ provide: LOGGER_TOKEN, useValue: loggerMock }],
+});
+
+const appService = resolve(AppService);
+// Now test the service with the mocked dependencies
 ```
 
-More examples and test helpers coming soon.
+More examples and test helpers are available in the testing package.
 
 ---
 
