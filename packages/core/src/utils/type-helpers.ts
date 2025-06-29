@@ -35,3 +35,19 @@ export function typedResolve<T>(
 ): T {
   return container.resolve(token) as T;
 }
+
+/**
+ * Cast a container to expose the internal registry used by tsyringe.
+ */
+export interface RegistryContainer extends DependencyContainer {
+  registry: {
+    registrations: Map<unknown, unknown>;
+    isResolved: (token: unknown) => boolean;
+  };
+}
+
+export function withRegistry(
+  container: DependencyContainer,
+): RegistryContainer {
+  return container as unknown as RegistryContainer;
+}
