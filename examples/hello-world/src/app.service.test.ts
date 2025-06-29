@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, mock, test } from "bun:test";
-import { createTestContext } from "@zenject/testing";
 import { LOGGER_LOGGER_TOKEN, type Logger } from "@zenject/logger";
+import { createTestContext } from "@zenject/testing";
 import { AppService } from "./app.service";
 
 describe("AppService", () => {

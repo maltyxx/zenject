@@ -27,4 +27,3 @@ export function InjectLogger(): PropertyDecorator {
     (logger, _, context) => logger.child({ context }),
   );
 }
-

@@ -14,6 +14,18 @@ import { container } from "tsyringe";
 // Helper to reset container state between tests
 function resetContainer() {
   AppContainer.reset();
+  (
+    AppLifecycle as unknown as {
+      isShuttingDown: boolean;
+      listeners: Map<unknown, unknown>;
+    }
+  ).isShuttingDown = false;
+  (
+    AppLifecycle as unknown as {
+      isShuttingDown: boolean;
+      listeners: Map<unknown, unknown>;
+    }
+  ).listeners = new Map();
 }
 
 // Dummy service implementing lifecycle hooks
@@ -85,7 +97,14 @@ describe("AppLifecycle registry", () => {
     const instance = new DummyService();
     AppLifecycle.register(instance);
     // Patch registry access for compatibility with tsyringe
-    (AppContainer as any).registry = {
+    (
+      AppContainer as unknown as {
+        registry: {
+          registrations: Map<unknown, unknown>;
+          isResolved: () => boolean;
+        };
+      }
+    ).registry = {
       registrations: new Map(),
       isResolved: () => true,
     };
@@ -98,7 +117,14 @@ describe("AppLifecycle registry", () => {
     const instance = new DummyService();
     AppLifecycle.register(instance);
     AppLifecycle.unregister(instance);
-    (AppContainer as any).registry = {
+    (
+      AppContainer as unknown as {
+        registry: {
+          registrations: Map<unknown, unknown>;
+          isResolved: () => boolean;
+        };
+      }
+    ).registry = {
       registrations: new Map(),
       isResolved: () => true,
     };
