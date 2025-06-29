@@ -1,70 +1,71 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-    "vcs": {
-      "enabled": false,
-      "clientKind": "git",
-      "useIgnoreFile": false
-    },
-    "files": {
-      "ignoreUnknown": false,
-      "ignore": []
-    },
-    "formatter": {
-      "enabled": true,
-      "indentStyle": "space",
-      "indentWidth": 2,
-      "lineWidth": 80,
-      "lineEnding": "lf"
-    },
-    "organizeImports": {
-      "enabled": true
-    },
-    "linter": {
-      "enabled": true,
-      "rules": {
-        "recommended": true,
-        "suspicious": {
-          "noExplicitAny": "error",
-          "noArrayIndexKey": "error",
-          "noConfusingVoidType": "warn"
-        },
-        "style": {
-          "useConsistentArrayType": "error",
-          "useShorthandArrayType": "error",
-          "noImplicitBoolean": "error",
-          "useImportType": "error"
-        },
-        "complexity": {
-          "noStaticOnlyClass": "off",
-          "useLiteralKeys": "error",
-          "noUselessFragments": "error"
-        },
-        "nursery": {
-          "useConsistentMemberAccessibility": {
-            "level": "error",
-            "options": {
-              "accessibility": "explicit"
-            }
-          }
-        },
-        "a11y": {
-          "useButtonType": "error"
-        }
-      }
-    },
-    "javascript": {
-      "parser": {
-        "unsafeParameterDecoratorsEnabled": true
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": [
+      "packages/cli/src/templates/*.template.ts"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noArrayIndexKey": "error",
+        "noConfusingVoidType": "warn"
       },
-      "formatter": {
-        "trailingCommas": "all",
-        "semicolons": "always",
-        "quoteStyle": "double",
-        "jsxQuoteStyle": "double",
-        "bracketSpacing": true,
-        "bracketSameLine": false,
-        "arrowParentheses": "always"
+      "style": {
+        "useConsistentArrayType": "error",
+        "useShorthandArrayType": "error",
+        "noImplicitBoolean": "error",
+        "useImportType": "error"
+      },
+      "complexity": {
+        "noStaticOnlyClass": "off",
+        "useLiteralKeys": "error",
+        "noUselessFragments": "error"
+      },
+      "nursery": {
+        "useConsistentMemberAccessibility": {
+          "level": "error",
+          "options": {
+            "accessibility": "explicit"
+          }
+        }
+      },
+      "a11y": {
+        "useButtonType": "error"
       }
     }
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "arrowParentheses": "always"
+    }
   }
-  
+}
