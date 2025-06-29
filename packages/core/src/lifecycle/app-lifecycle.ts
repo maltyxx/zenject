@@ -1,6 +1,9 @@
+import type TsInjectionToken from "tsyringe/dist/typings/providers/injection-token";
 import { AppContainer } from "../container";
 import { getLoadedModules } from "../decorators/module";
 import { callOnDestroy, isOnDestroy } from "../interfaces/lifecycle";
+import type { InjectionToken } from "../tokens/injection-token";
+import { withRegistry } from "../utils/type-helpers";
 
 /**
  * Registry of instances registered with the lifecycle manager
@@ -143,18 +146,20 @@ export class AppLifecycle {
     await AppLifecycle.emitEvent(LifecycleEvent.SHUTDOWN);
 
     // Get all registered services from the container
-    const registeredTokens = AppContainer.registry.registrations;
+    const registryContainer = withRegistry(AppContainer);
+    const registeredTokens = registryContainer.registry.registrations;
     const allInstances = [];
 
     // Collect instances from container
     for (const [token] of registeredTokens) {
+      const typedToken = token as unknown as TsInjectionToken;
       try {
         // Only check already resolved instances to avoid creating new ones during shutdown
         if (
-          AppContainer.isRegistered(token) &&
-          AppContainer.registry.isResolved(token)
+          AppContainer.isRegistered(typedToken) &&
+          registryContainer.registry.isResolved(typedToken)
         ) {
-          const instance = AppContainer.resolve(token);
+          const instance = AppContainer.resolve(typedToken);
           if (isOnDestroy(instance)) {
             allInstances.push(instance);
           }
