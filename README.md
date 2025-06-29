@@ -119,6 +119,98 @@ More examples and test helpers are available in the testing package.
 
 ---
 
+## 🧩 Dynamic Modules
+
+Dynamic modules allow runtime configuration of providers and imports. A module can expose a
+`forRoot()` method (or any factory) that returns a `DynamicModule` object. This object
+describes the module class along with additional providers or sub-modules to load.
+
+```ts
+// config.module.ts
+import { Module, type DynamicModule } from "@zenject/core";
+
+@Module()
+export class ConfigModule {
+  static forRoot(options: Record<string, unknown>): DynamicModule {
+    return {
+      module: ConfigModule,
+      providers: [{ provide: "CONFIG_OPTIONS", useValue: options }],
+      exports: ["CONFIG_OPTIONS"],
+    };
+  }
+}
+
+// Loading at runtime
+await loadModule(ConfigModule.forRoot({ env: "prod" }));
+```
+
+## 🔌 Plugin Manager
+
+`PluginManager` offers lazy registration of optional features. Plugins are registered with a
+name and a loader function, then loaded on demand:
+
+```ts
+PluginManager.register("redis", () => import("@zenject/redis"));
+await PluginManager.load("redis"); // loaded once even if called multiple times
+```
+
+`isRegistered()` and `isLoaded()` help track the plugin state.
+
+## 🚀 Example Application
+
+Below is a minimal HTTP server illustrating a complete setup:
+
+```ts
+import { Module, loadModule, Zenject } from "@zenject/core";
+
+@Module({ providers: [] })
+class HttpModule {}
+
+class HttpService {
+  start() {
+    return Bun.serve({
+      port: 3000,
+      fetch() {
+        return new Response("Hello HTTP!");
+      },
+    });
+  }
+}
+
+@Module({ providers: [HttpService] })
+class AppModule {}
+
+const app = new Zenject(AppModule);
+await app.bootstrap(() => {
+  const srv = app.resolve(HttpService).start();
+  console.log("Listening on", srv.port);
+});
+```
+
+## ⚙️ CLI & Project Structure
+
+Install the CLI and scaffold new components with:
+
+```bash
+bun add -d @zenject/cli
+bunx @zenject/cli new:app api
+```
+
+Typical workspace layout:
+
+```
+my-project/
+  apps/
+    api/
+      src/
+        api.module.ts
+        main.ts
+  packages/
+    core-lib/
+    logger/
+```
+
+
 ## 📥 Contributing
 
 Contributions are welcome!
