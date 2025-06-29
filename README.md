@@ -48,6 +48,13 @@ bun run src/main.ts
 # → Hello World 👋
 ```
 
+### Logger configuration
+
+The `@zenject/logger` package can be tuned via environment variables:
+
+- `LOGGER_LEVEL` – sets the logging level (defaults to `info`)
+- `LOGGER_FORMAT` – set to `pretty` for colored, human‑readable output.
+
 ---
 
 ### Example files
