@@ -25,29 +25,31 @@ interface TestContext {
 
 /**
  * Creates a testing context with a container that can be used to resolve dependencies
- * 
+ *
  * @param opts Options for creating the test context
  * @returns A test context with container and resolve function
- * 
+ *
  * @example
  * // Test a service with mocks
  * const { resolve } = await createTestContext({
  *   providers: [AppService],
  *   overrides: [{ provide: LOGGER_LOGGER_TOKEN, useValue: loggerMock }],
  * });
- * 
+ *
  * const appService = resolve(AppService);
- * 
+ *
  * @example
  * // Test a module with overrides
  * const { resolve } = await createTestContext({
  *   imports: [LoggerModule],
  *   overrides: [{ provide: LOGGER_CONFIG_TOKEN, useValue: { level: "debug" } }],
  * });
- * 
+ *
  * const logger = resolve(LOGGER_LOGGER_TOKEN);
  */
-export async function createTestContext(opts: CreateTestContextOptions): Promise<TestContext> {
+export async function createTestContext(
+  opts: CreateTestContextOptions,
+): Promise<TestContext> {
   const container = createTestingContainer();
   let app: Zenject | undefined;
 
@@ -57,7 +59,7 @@ export async function createTestContext(opts: CreateTestContextOptions): Promise
       container.register(item.provide, { useValue: item.useValue });
     } else {
       container.register(item, { useClass: item });
-      
+
       // Important: Override injection container for this class
       // This ensures decorators like @InjectLogger() use our test container
       overrideInjectionContainerForTest(item, container);
@@ -69,13 +71,13 @@ export async function createTestContext(opts: CreateTestContextOptions): Promise
     container.register(provide, { useValue });
   }
 
-  // Handle module imports - simplification comme suggéré
+  // Handle module imports - simplified as suggested
   if (opts.imports?.length) {
     for (const mod of opts.imports) {
       overrideInjectionContainerForTest(mod, container);
     }
-    
-    // Bootstrap le premier module comme racine (s'il existe, ce qu'on sait déjà par la condition)
+
+    // Bootstrap the first imported module as root (we know it exists from the condition)
     const rootModule = opts.imports[0] as Constructor<unknown>;
     app = new Zenject(rootModule);
     await app.bootstrap();
@@ -86,4 +88,4 @@ export async function createTestContext(opts: CreateTestContextOptions): Promise
     app,
     resolve: <T>(token: Token<T>): T => container.resolve(token),
   };
-} 
+}
