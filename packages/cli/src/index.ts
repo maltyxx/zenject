@@ -146,7 +146,7 @@ async function safeWriteFile(
     return false;
   }
 
-  // Write the file with Bun.write (API native optimisée)
+  // Write the file with Bun.write (optimized native API)
   // Use createPath: true to create directories automatically (Bun 1.1+)
   await Bun.write(filePath, content, { createPath: true });
   return true;
