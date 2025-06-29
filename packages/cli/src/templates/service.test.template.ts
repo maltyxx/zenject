@@ -1,10 +1,10 @@
 import { describe, expect, it, beforeEach, afterEach, mock } from "bun:test";
 import { ${CLASS_NAME} } from "./${SERVICE_NAME}.service";
-import { createTestingContainer, createMock } from "@maltyxx/zenject/testing";
-import { AppLifecycle } from "@maltyxx/zenject";
+import { createTestingContainer, createMock } from "@zenject/testing";
+import { AppLifecycle } from "@zenject/core";
 
 describe("${CLASS_NAME}", () => {
-  let service: $CLASS_NAME;
+  let service: ${CLASS_NAME};
   let testContainer;
 
   // Example of mocking a dependency
