@@ -18,8 +18,4 @@ import { appConfig } from "./config";
     // Export services for external use
   ],
 })
-export class $ {
-  CLASS_NAME;
-}
-{
-}
+export class ${CLASS_NAME} {}
