@@ -3,36 +3,11 @@
   "version": "1.0.0",
   "description": "A lightweight dependency injection framework for Bun.js applications",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "workspaces": ["packages/*", "examples/*"],
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./testing": {
-      "import": "./dist/testing/index.js",
-      "types": "./dist/testing/index.d.ts"
-    },
-    "./tokens": {
-      "import": "./dist/tokens/common-tokens.js",
-      "types": "./dist/tokens/common-tokens.d.ts"
-    },
-    "./cli": {
-      "import": "./dist/cli/index.js",
-      "types": "./dist/cli/index.d.ts"
-    },
-    "./package.json": "./package.json"
-  },
-  "bin": {
-    "zenject": "./dist/cli/index.js"
-  },
-  "files": ["dist", "README.md", "LICENSE"],
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
   "scripts": {
-    "build": "bun build ./src/index.ts --outdir ./dist --target node --minify",
-    "dev": "bun build ./src/index.ts --outdir ./dist --target node --watch",
     "test": "bun test",
     "test:watch": "bun test --watch",
     "test:cov": "bun test --coverage",
