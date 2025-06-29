@@ -5,6 +5,7 @@ import {
   InjectionToken,
   Module,
   PluginManager,
+  type Token,
   createInjectionDecorator,
   loadModule,
   overrideInjectionContainerForTest,
@@ -51,7 +52,9 @@ class DummyModule {}
 class PluginModule {}
 
 // Token and injection decorator for testing createInjectionDecorator
-const VALUE_TOKEN = new InjectionToken<string>("VALUE_TOKEN");
+const VALUE_TOKEN = new InjectionToken<string>(
+  "VALUE_TOKEN",
+) as unknown as Token<string>;
 const InjectValue = createInjectionDecorator<string>(VALUE_TOKEN);
 
 class InjectionService {

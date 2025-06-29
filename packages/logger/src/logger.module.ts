@@ -11,7 +11,8 @@ import { loggerConfig } from "./logger.config";
     },
     {
       provide: LOGGER_LOGGER_TOKEN,
-      useFactory: (config: LoggerOptions) => {
+      useFactory: (...args: unknown[]) => {
+        const config = args[0] as LoggerOptions;
         return pino(config);
       },
       deps: [LOGGER_CONFIG_TOKEN],
