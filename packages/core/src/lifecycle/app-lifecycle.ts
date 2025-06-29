@@ -49,9 +49,9 @@ export class AppLifecycle {
       managedInstances.add(instance);
 
       // Register exit handlers first time
-      if (!this.exitHandlersRegistered) {
-        this.registerExitHandlers();
-        this.exitHandlersRegistered = true;
+      if (!AppLifecycle.exitHandlersRegistered) {
+        AppLifecycle.registerExitHandlers();
+        AppLifecycle.exitHandlersRegistered = true;
       }
     }
   }
@@ -75,11 +75,10 @@ export class AppLifecycle {
     event: LifecycleEvent,
     listener: LifecycleListener,
   ): void {
-    if (!this.listeners.has(event)) {
-      this.listeners.set(event, new Set());
+    if (!AppLifecycle.listeners.has(event)) {
+      AppLifecycle.listeners.set(event, new Set());
     }
-
-    this.listeners.get(event)!.add(listener);
+    AppLifecycle.listeners.get(event)?.add(listener);
   }
 
   /**
@@ -92,8 +91,8 @@ export class AppLifecycle {
     event: LifecycleEvent,
     listener: LifecycleListener,
   ): void {
-    if (this.listeners.has(event)) {
-      this.listeners.get(event)!.delete(listener);
+    if (AppLifecycle.listeners.has(event)) {
+      AppLifecycle.listeners.get(event)?.delete(listener);
     }
   }
 
@@ -103,7 +102,7 @@ export class AppLifecycle {
    * @param event The lifecycle event to emit
    */
   private static async emitEvent(event: LifecycleEvent): Promise<void> {
-    const listeners = this.listeners.get(event);
+    const listeners = AppLifecycle.listeners.get(event);
     if (!listeners) return;
 
     const promises: Promise<void>[] = [];
@@ -130,18 +129,18 @@ export class AppLifecycle {
    * @returns Promise that resolves when shutdown is complete
    */
   public static async shutdown(exitCode = 0): Promise<void> {
-    if (this.isShuttingDown) {
+    if (AppLifecycle.isShuttingDown) {
       return; // Already shutting down
     }
 
-    this.isShuttingDown = true;
+    AppLifecycle.isShuttingDown = true;
     console.log("Shutting down application...");
 
     // Emit before shutdown event
-    await this.emitEvent(LifecycleEvent.BEFORE_SHUTDOWN);
+    await AppLifecycle.emitEvent(LifecycleEvent.BEFORE_SHUTDOWN);
 
     // Emit shutdown event
-    await this.emitEvent(LifecycleEvent.SHUTDOWN);
+    await AppLifecycle.emitEvent(LifecycleEvent.SHUTDOWN);
 
     // Get all registered services from the container
     const registeredTokens = AppContainer.registry.registrations;
@@ -185,7 +184,7 @@ export class AppLifecycle {
     await Promise.all(destroyPromises);
 
     // Emit after shutdown event
-    await this.emitEvent(LifecycleEvent.AFTER_SHUTDOWN);
+    await AppLifecycle.emitEvent(LifecycleEvent.AFTER_SHUTDOWN);
 
     console.log("Application shutdown complete");
 
@@ -202,7 +201,7 @@ export class AppLifecycle {
     // Handle SIGINT (Ctrl+C)
     process.on("SIGINT", () => {
       console.log("\nReceived SIGINT");
-      this.shutdown(0).catch((err) => {
+      AppLifecycle.shutdown(0).catch((err) => {
         console.error("Error during shutdown:", err);
         process.exit(1);
       });
@@ -211,7 +210,7 @@ export class AppLifecycle {
     // Handle SIGTERM (kill)
     process.on("SIGTERM", () => {
       console.log("\nReceived SIGTERM");
-      this.shutdown(0).catch((err) => {
+      AppLifecycle.shutdown(0).catch((err) => {
         console.error("Error during shutdown:", err);
         process.exit(1);
       });
@@ -220,7 +219,7 @@ export class AppLifecycle {
     // Handle uncaught exceptions
     process.on("uncaughtException", (err) => {
       console.error("Uncaught exception:", err);
-      this.shutdown(1).catch((shutdownErr) => {
+      AppLifecycle.shutdown(1).catch((shutdownErr) => {
         console.error("Error during shutdown:", shutdownErr);
         process.exit(1);
       });
@@ -229,7 +228,7 @@ export class AppLifecycle {
     // Handle unhandled rejections
     process.on("unhandledRejection", (reason) => {
       console.error("Unhandled rejection:", reason);
-      this.shutdown(1).catch((err) => {
+      AppLifecycle.shutdown(1).catch((err) => {
         console.error("Error during shutdown:", err);
         process.exit(1);
       });

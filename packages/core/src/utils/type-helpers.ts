@@ -15,7 +15,7 @@ export type KeysOfType<T, V> = {
 /**
  * Check if a value is a token
  */
-export function isToken<T>(value: any): value is Token<T> {
+export function isToken<T>(value: unknown): value is Token<T> {
   return (
     value !== null &&
     value !== undefined &&

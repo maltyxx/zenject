@@ -31,4 +31,10 @@ export * from "./interfaces/plugin.interface";
 export * from "./utils/type-helpers";
 
 // Re-export injectable decorator from tsyringe for convenience
-export { injectable, inject, singleton, type DependencyContainer, container } from "tsyringe";
+export {
+  injectable,
+  inject,
+  singleton,
+  type DependencyContainer,
+  container,
+} from "tsyringe";

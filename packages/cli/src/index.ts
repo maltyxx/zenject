@@ -1,7 +1,11 @@
 #!/usr/bin/env bun
 
+// biome-ignore lint/style/useNodejsImportProtocol: bun-compatible imports
 import { join, resolve } from "path";
+// biome-ignore lint/style/useNodejsImportProtocol: bun-compatible imports
 import { parseArgs } from "util";
+// bun supports importing Node built-ins without the node: prefix
+// biome-ignore lint/style/useNodejsImportProtocol: bun-compatible imports
 import { mkdir } from "fs/promises";
 
 const TEMPLATE_DIR = join(import.meta.dir, "templates");

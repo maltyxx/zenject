@@ -51,7 +51,7 @@ export class InjectionToken<T = unknown> {
    * Creates a new InjectionToken.
    * @param descriptionOrOptions A human-readable description or options
    */
-  constructor(descriptionOrOptions: string | InjectionTokenOptions) {
+  public constructor(descriptionOrOptions: string | InjectionTokenOptions) {
     if (typeof descriptionOrOptions === "string") {
       this.description = descriptionOrOptions;
       this.scope = Scope.SINGLETON;

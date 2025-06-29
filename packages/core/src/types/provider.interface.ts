@@ -32,7 +32,7 @@ import type { Token } from "./token.type";
 /**
  * Provider that maps a token to a concrete class.
  */
-export interface ClassProvider<T = any> {
+export interface ClassProvider<T = unknown> {
   /** Token that identifies the dependency */
   provide: Token<T>;
   /** Class to instantiate for the token */
@@ -44,7 +44,7 @@ export interface ClassProvider<T = any> {
 /**
  * Provider that maps a token to a static value.
  */
-export interface ValueProvider<T = any> {
+export interface ValueProvider<T = unknown> {
   /** Token that identifies the dependency */
   provide: Token<T>;
   /** Value to use for the token */
@@ -54,19 +54,19 @@ export interface ValueProvider<T = any> {
 /**
  * Provider that maps a token to a factory function.
  */
-export interface FactoryProvider<T = any> {
+export interface FactoryProvider<T = unknown> {
   /** Token that identifies the dependency */
   provide: Token<T>;
   /** Factory function to call for creating the dependency */
-  useFactory: (...args: any[]) => T;
+  useFactory: (...args: unknown[]) => T;
   /** Optional list of dependencies for the factory */
-  deps?: Token<any>[];
+  deps?: Token<unknown>[];
 }
 
 /**
  * Provider that maps a token to an existing token.
  */
-export interface ExistingProvider<T = any> {
+export interface ExistingProvider<T = unknown> {
   /** Token that identifies the dependency */
   provide: Token<T>;
   /** Existing token to use */
@@ -76,7 +76,7 @@ export interface ExistingProvider<T = any> {
 /**
  * Union type of all provider types.
  */
-export type Provider<T = any> =
+export type Provider<T = unknown> =
   | Constructor<T>
   | ClassProvider<T>
   | ValueProvider<T>
