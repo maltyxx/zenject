@@ -1,5 +1,10 @@
 import { beforeEach, describe, expect, test } from "bun:test";
-import { AppContainer, InjectionToken, type OnInit } from "@zenject/core";
+import {
+  AppContainer,
+  InjectionToken,
+  type OnInit,
+  type Token,
+} from "@zenject/core";
 import {
   isClassProvider,
   isConstructorProvider,
@@ -35,17 +40,22 @@ describe("provider registration", () => {
   });
 
   test("value provider", async () => {
-    const TOKEN = new InjectionToken<string>("token");
+    const TOKEN = new InjectionToken<string>(
+      "token",
+    ) as unknown as Token<string>;
     await registerProvider({ provide: TOKEN, useValue: "hello" });
     expect(AppContainer.resolve(TOKEN)).toBe("hello");
   });
 
   test("factory provider with deps", async () => {
-    const TOKEN = new InjectionToken<string>("factory");
+    const TOKEN = new InjectionToken<string>(
+      "factory",
+    ) as unknown as Token<string>;
     await registerProvider({ provide: TOKEN, useValue: "dep" });
     await registerProvider({
       provide: Service,
-      useFactory: (val: string) => {
+      useFactory: (...args: unknown[]) => {
+        const val = args[0] as string;
         const svc = new Service();
         svc.onInit();
         svc.initialized = svc.initialized && val === "dep";
@@ -58,9 +68,13 @@ describe("provider registration", () => {
   });
 
   test("existing provider", async () => {
-    const TOKEN = new InjectionToken<string>("orig");
+    const TOKEN = new InjectionToken<string>(
+      "orig",
+    ) as unknown as Token<string>;
     await registerProvider({ provide: TOKEN, useValue: "base" });
-    const ALIAS = new InjectionToken<string>("alias");
+    const ALIAS = new InjectionToken<string>(
+      "alias",
+    ) as unknown as Token<string>;
     await registerProvider({ provide: ALIAS, useExisting: TOKEN });
     expect(AppContainer.resolve(ALIAS)).toBe("base");
   });

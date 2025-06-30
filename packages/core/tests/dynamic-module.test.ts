@@ -37,7 +37,7 @@ describe("processDynamicModule", () => {
     };
     const modB: DynamicModule = {
       module: ModuleB,
-      imports: [modA],
+      imports: [modA.module],
       providers: [ServiceB],
     };
     await loadModule(modB);

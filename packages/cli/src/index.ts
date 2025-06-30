@@ -100,8 +100,8 @@ async function main() {
       return;
     }
 
-    const command = positionals[0];
-    const name = positionals[1];
+    const command = positionals[0] as string;
+    const name = positionals[1] as string;
 
     if (!name) {
       console.error("Error: Name is required");
@@ -171,9 +171,8 @@ async function makeDirectory(dir: string): Promise<void> {
     try {
       await mkdir(dir, { recursive: true });
     } catch (mkdirErr) {
-      throw new Error(
-        `Failed to create directory: ${dir}, reason: ${mkdirErr.message}`,
-      );
+      const msg = (mkdirErr as Error).message;
+      throw new Error(`Failed to create directory: ${dir}, reason: ${msg}`);
     }
   }
 }
@@ -490,13 +489,13 @@ async function updateWorkspaceIfNeeded(outputPath: string): Promise<void> {
       await Bun.$`bun install --silent`;
       console.log("Updated bun.lockb with new workspace");
     } catch (err) {
-      console.warn(`Note: Failed to update lockfile: ${err.message}`);
+      const msg = (err as Error).message;
+      console.warn(`Note: Failed to update lockfile: ${msg}`);
     }
   } catch (err) {
     // Log but don't fail if workspace update fails
-    console.warn(
-      `Note: Could not update workspaces in package.json: ${err.message}`,
-    );
+    const msg = (err as Error).message;
+    console.warn(`Note: Could not update workspaces in package.json: ${msg}`);
   }
 }
 

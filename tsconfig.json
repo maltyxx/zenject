@@ -39,9 +39,5 @@
       "@zenject/testing/*": ["./packages/testing/src/*"]
     }
   },
-  "exclude": [
-    "packages/cli/src/**/*",
-    "packages/*/tests/**/*",
-    "examples/**/*.ts"
-  ]
+  "exclude": ["packages/cli/src/templates/**/*"]
 }

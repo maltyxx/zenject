@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, test } from "bun:test";
 import {
   AppContainer,
   InjectionToken,
+  type Token,
   createIsolatedContainer,
   createScope,
 } from "@zenject/core";
@@ -23,7 +24,7 @@ describe("container helpers", () => {
   });
 
   test("createIsolatedContainer should not inherit registrations", () => {
-    const TOKEN = new InjectionToken<number>("num");
+    const TOKEN = new InjectionToken<number>("num") as unknown as Token<number>;
     AppContainer.register(TOKEN, { useValue: 1 });
     const isolated = createIsolatedContainer();
     expect(() => isolated.resolve(TOKEN)).toThrow();

@@ -65,7 +65,7 @@ export function createInjectionDecorator<T, R = T>(
         if (!this.__injectionCache[cacheKey]) {
           // Get the appropriate container
           const container = getInjectionContainer(
-            target.constructor as unknown as Constructor<unknown>,
+            target.constructor as Constructor<unknown>,
           );
 
           // Resolve the dependency
