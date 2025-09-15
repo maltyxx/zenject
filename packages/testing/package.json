@@ -2,16 +2,13 @@
   "name": "@zenject/testing",
   "description": "A testing module for Zenject",
   "type": "module",
+  "main": "src/index.ts",
   "author": "Yoann Vanitou",
   "license": "MIT",
   "engines": {
     "bun": ">=1.0.0"
   },
   "dependencies": {
-    "@zenject/core": "workspace:*",
-    "@zenject/logger": "workspace:*"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "@zenject/core": "workspace:*"
   }
 }

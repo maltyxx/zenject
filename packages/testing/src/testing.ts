@@ -1,4 +1,4 @@
-import { type DependencyContainer, type Token, container } from "@zenject/core";
+import { container, type DependencyContainer, type Token } from "@zenject/core";
 
 /**
  * Create a testing container with optional overrides
@@ -60,7 +60,7 @@ export function createTestingContainer(
  * });
  */
 export function createMock<T extends object>(
-  token: Token<T>,
+  _token: Token<T>,
   methods: Partial<T> = {},
 ): T {
   return methods as T;
