@@ -11,8 +11,6 @@ import { YamlService } from "./services/yaml.service.js";
 import type { ConfigModuleOptions } from "./types/config-module.type.js";
 import type { ConfigResult } from "./types/config-result.type.js";
 
-const DEFAULT_CONFIG_PATH = "config/settings.yaml";
-
 /**
  * Configuration module with service-based architecture
  */
@@ -26,7 +24,7 @@ export class ConfigModule {
       enableEnvOverrides = true,
       load = [],
       envPrefix = "APP",
-      filePath = DEFAULT_CONFIG_PATH,
+      filePath,
     } = options;
 
     const providers: Provider[] = [
@@ -70,7 +68,6 @@ export class ConfigModule {
         provide: config.KEY,
         useFactory: async (configService: ConfigService) => {
           return configService.loadConfig(config, {
-            filePath: DEFAULT_CONFIG_PATH,
             enableEnvOverrides: true,
             envPrefix: "APP",
           });

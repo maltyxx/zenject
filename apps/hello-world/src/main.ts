@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { Zenject } from "@zenject/core";
 import { AppModule } from "./app.module";
 import { AppService } from "./app.service";

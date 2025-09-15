@@ -7,7 +7,6 @@ import { AppService } from "./app.service";
 @Module({
   imports: [
     ConfigModule.forRoot({
-      enableEnvOverrides: true,
       load: [appConfig],
     }),
     LoggerModule,

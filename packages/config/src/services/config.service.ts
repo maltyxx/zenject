@@ -19,21 +19,25 @@ export class ConfigService {
     options: ConfigLoadOptions = {},
   ): Promise<z.infer<T>> {
     const {
-      filePath = "config/settings.yaml",
+      filePath,
       enableEnvOverrides = true,
       envPrefix = "APP",
     } = options;
 
     try {
-      const yamlData =
-        await this.yamlService.importFile<Record<string, unknown>>(filePath);
-
-      const namespaceData = yamlData[configDef.namespace];
       const defaults = configDef.getDefaults();
+      let configData: unknown = defaults;
 
-      let configData: unknown = namespaceData
-        ? this.deepMerge(defaults as Record<string, unknown>, namespaceData)
-        : defaults;
+      // Only try to load YAML if a filePath is explicitly provided and not empty
+      if (filePath && filePath.trim() !== "") {
+        const yamlData =
+          await this.yamlService.importFile<Record<string, unknown>>(filePath);
+
+        const namespaceData = yamlData[configDef.namespace];
+        configData = namespaceData
+          ? this.deepMerge(defaults as Record<string, unknown>, namespaceData)
+          : defaults;
+      }
 
       if (enableEnvOverrides) {
         const wrappedConfig = { [configDef.namespace]: configData };
