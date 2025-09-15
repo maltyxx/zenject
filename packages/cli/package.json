@@ -2,6 +2,7 @@
   "name": "@zenject/cli",
   "description": "A CLI for Zenject",
   "type": "module",
+  "main": "src/index.ts",
   "author": "Yoann Vanitou",
   "license": "MIT",
   "engines": {

@@ -1,4 +1,4 @@
-import { Module, APP_CONFIG } from "@zenject/core";
+import { APP_CONFIG, Module } from "@zenject/core";
 import { appConfig } from "./config";
 
 /**
@@ -18,4 +18,8 @@ import { appConfig } from "./config";
     // Export services for external use
   ],
 })
-export class ${CLASS_NAME} {}
+export class $ {
+  CLASS_NAME;
+}
+{
+}

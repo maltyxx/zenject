@@ -1,12 +1,12 @@
 #!/usr/bin/env bun
 
+// bun supports importing Node built-ins without the node: prefix
+// biome-ignore lint/style/useNodejsImportProtocol: bun-compatible imports
+import { mkdir } from "fs/promises";
 // biome-ignore lint/style/useNodejsImportProtocol: bun-compatible imports
 import { join, resolve } from "path";
 // biome-ignore lint/style/useNodejsImportProtocol: bun-compatible imports
 import { parseArgs } from "util";
-// bun supports importing Node built-ins without the node: prefix
-// biome-ignore lint/style/useNodejsImportProtocol: bun-compatible imports
-import { mkdir } from "fs/promises";
 
 const TEMPLATE_DIR = join(import.meta.dir, "templates");
 
@@ -166,7 +166,7 @@ async function makeDirectory(dir: string): Promise<void> {
     // Use Bun Shell to create the directory
     // Wrapped in try/catch for Windows compatibility
     await Bun.$`mkdir -p ${dir}`;
-  } catch (err) {
+  } catch (_err) {
     // Fallback to fs/promises if shell command fails or doesn't exist
     try {
       await mkdir(dir, { recursive: true });
@@ -364,7 +364,7 @@ async function getTemplate(templateName: string): Promise<string> {
   try {
     // Use Bun.file to read the template
     return await Bun.file(path).text();
-  } catch (err) {
+  } catch (_err) {
     throw new Error(`Template not found: ${templateName}`);
   }
 }
@@ -385,7 +385,7 @@ function formatName(name: string): string {
  * @param name CamelCase name
  * @returns Kebab-case name
  */
-function camelToKebab(name: string): string {
+function _camelToKebab(name: string): string {
   return name
     .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
     .replace(/[\s_]+/g, "-")
