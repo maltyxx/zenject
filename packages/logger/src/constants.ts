@@ -1,2 +1,1 @@
-export const LOGGER_CONFIG_TOKEN = Symbol("LOGGER_CONFIG_TOKEN");
-export const LOGGER_LOGGER_TOKEN = Symbol("LOGGER_LOGGER_TOKEN");
+export const LOGGER_TOKEN = Symbol("LOGGER_TOKEN");

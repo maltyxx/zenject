@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { createInjectionDecorator } from "@zenject/core";
-import { LOGGER_LOGGER_TOKEN } from "./constants";
-import type { Logger } from "./logger.interface";
+import { LOGGER_TOKEN } from "./constants.js";
+import type { Logger } from "./logger.interface.js";
 
 /**
  * Property decorator that injects a contextualized logger directly.
@@ -22,8 +22,7 @@ import type { Logger } from "./logger.interface";
  * @returns {PropertyDecorator} A property decorator function
  */
 export function InjectLogger(): PropertyDecorator {
-  return createInjectionDecorator<Logger>(
-    LOGGER_LOGGER_TOKEN,
-    (logger, _, context) => logger.child({ context }),
+  return createInjectionDecorator<Logger>(LOGGER_TOKEN, (logger, _, context) =>
+    logger.child({ context }),
   );
 }

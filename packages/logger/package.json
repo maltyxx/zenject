@@ -2,6 +2,7 @@
   "name": "@zenject/logger",
   "description": "A logger module for Zenject",
   "type": "module",
+  "main": "src/index.ts",
   "author": "Yoann Vanitou",
   "license": "MIT",
   "engines": {
@@ -9,10 +10,8 @@
   },
   "dependencies": {
     "@zenject/core": "workspace:*",
+    "@zenject/config": "workspace:*",
     "pino": "^9.6.0",
     "pino-pretty": "^13.0.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
   }
 }
