@@ -3,7 +3,7 @@
 ## Coding Style
 - All code and comments must be written in **English**.
 - Use the existing Biome configuration for formatting. Run `bun run format` to auto format before committing.
-- Lint the code with `bun run lint`. You may use `bun run lint:fix` to automatically apply fixes.
+- You may use `bun run lint` to automatically apply fixes.
 - Ensure TypeScript type checking passes by running `bun run typecheck`.
 - This project targets **BunJS**, not NodeJS. Avoid using the `node:` protocol and prefer Bun's native imports.
 

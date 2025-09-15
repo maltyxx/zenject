@@ -32,6 +32,7 @@ bun add @zenject/core
 
 # Optional packages
 bun add @zenject/logger # For logging functionality
+bun add @zenject/config # For advanced configuration with YAML support
 bun add @zenject/testing # For testing utilities
 bun add @zenject/cli # For CLI tools
 ````
@@ -40,10 +41,10 @@ bun add @zenject/cli # For CLI tools
 
 A minimal Hello World example is available in the repository:
 
-📁 [`examples/hello-world`](https://github.com/maltyxx/zenject/tree/main/examples/hello-world)
+📁 [`apps/hello-world`](https://github.com/maltyxx/zenject/tree/main/apps/hello-world)
 
 ```bash
-cd examples/hello-world
+cd apps/hello-world
 bun run src/main.ts
 # → Hello World 👋
 ```
@@ -151,17 +152,72 @@ export class ConfigModule {
 await loadModule(ConfigModule.forRoot({ env: "prod" }));
 ```
 
-## 🔌 Plugin Manager
+## ⚙️ Configuration Module
 
-`PluginManager` offers lazy registration of optional features. Plugins are registered with a
-name and a loader function, then loaded on demand:
+The `@zenject/config` package provides advanced configuration management with YAML support, schema validation, and environment overrides:
 
 ```ts
-PluginManager.register("redis", () => import("@zenject/redis"));
-await PluginManager.load("redis"); // loaded once even if called multiple times
+import { createConfig, ConfigModule } from "@zenject/config";
+import { z } from "zod";
+
+// Define configuration schema
+const AppConfig = createConfig("app", {
+  schema: z.object({
+    name: z.string().default("MyApp"),
+    version: z.string().default("1.0.0"),
+    database: z.object({
+      host: z.string().default("localhost"),
+      port: z.number().default(5432),
+      name: z.string().default("myapp"),
+    }),
+    features: z.array(z.string()).default([]),
+    debug: z.boolean().default(false),
+  }),
+  envOverrides: {
+    "database.host": "DB_HOST",
+    "database.port": "DB_PORT", 
+    "database.name": "DB_NAME",
+    debug: "DEBUG",
+  },
+});
+
+// Load in module with custom file path
+@Module({
+  imports: [ConfigModule.forRoot({ 
+    filePath: "config/settings.yaml",
+    enableEnvOverrides: true,
+    load: [AppConfig] 
+  })],
+})
+class AppModule {}
+
+// Inject in service
+class DatabaseService {
+  constructor(@Inject(AppConfig.KEY) private config: z.infer<typeof AppConfig.schema>) {
+    console.log(`Connecting to ${this.config.database.host}:${this.config.database.port}`);
+  }
+}
 ```
 
-`isRegistered()` and `isLoaded()` help track the plugin state.
+**Example YAML configuration file** (`config/settings.yaml`):
+
+```yaml
+app:
+  name: "My Awesome App"
+  version: "2.1.0"
+  database:
+    host: "db.example.com"
+    port: 5432
+    name: "production_db"
+  features:
+    - "authentication"
+    - "analytics" 
+    - "notifications"
+    - "real-time-updates"
+  debug: false
+```
+
+Configuration files are loaded from `config/settings.yaml` by default, with environment variables taking precedence over YAML values.
 
 ## 🚀 Example Application
 
@@ -212,9 +268,17 @@ my-project/
       src/
         api.module.ts
         main.ts
+    hello-world/
+      src/
+        app.module.ts
+        app.service.ts
+        main.ts
   packages/
-    core-lib/
+    core/
     logger/
+    config/
+    testing/
+    cli/
 ```
 
 
