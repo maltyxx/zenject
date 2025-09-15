@@ -1,0 +1,16 @@
+{
+  "name": "@zenject/config",
+  "description": "Advanced configuration module with YAML support and environment overrides",
+  "type": "module",
+  "main": "src/index.ts",
+  "author": "Yoann Vanitou",
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "dependencies": {
+    "@zenject/core": "workspace:*",
+    "reflect-metadata": "^0.2.2",
+    "zod": "^3.22.0"
+  }
+}
