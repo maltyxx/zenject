@@ -5,6 +5,8 @@
 [![bun](https://img.shields.io/badge/bun-powered-blue)](https://bun.sh)
 [![license](https://img.shields.io/github/license/maltyxx/zenject)](https://github.com/maltyxx/zenject/blob/main/LICENSE)
 
+📖 **[Complete Framework Guide](GUIDE.md)** - Comprehensive documentation with detailed examples, architecture diagrams, and advanced usage patterns.
+
 ---
 
 ## ✨ Why Zenject?
@@ -35,7 +37,7 @@ bun add @zenject/logger # For logging functionality
 bun add @zenject/config # For advanced configuration with YAML support
 bun add @zenject/testing # For testing utilities
 bun add @zenject/cli # For CLI tools
-````
+```
 
 ### 2. Run Example
 
@@ -63,6 +65,9 @@ The `@zenject/logger` package can be tuned via environment variables:
 #### `hello.service.ts`
 
 ```ts
+import { Injectable } from "@zenject/core";
+
+@Injectable()
 export class HelloService {
   public helloWorld(): string {
     return "Hello World 👋";
@@ -83,13 +88,14 @@ export class HelloModule {}
 #### `main.ts`
 
 ```ts
+import "reflect-metadata";
 import { Zenject } from "@zenject/core";
 import { HelloModule } from "./hello.module";
 import { HelloService } from "./hello.service";
 
 const app = new Zenject(HelloModule);
 
-app.bootstrap(() => {
+await app.bootstrap(() => {
   const service = app.resolve(HelloService);
   console.log(service.helloWorld());
 });
@@ -224,11 +230,10 @@ Configuration files are loaded from `config/settings.yaml` by default, with envi
 Below is a minimal HTTP server illustrating a complete setup:
 
 ```ts
-import { Module, loadModule, Zenject } from "@zenject/core";
+import "reflect-metadata";
+import { Module, Zenject, Injectable } from "@zenject/core";
 
-@Module({ providers: [] })
-class HttpModule {}
-
+@Injectable()
 class HttpService {
   start() {
     return Bun.serve({
