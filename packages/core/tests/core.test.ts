@@ -2,13 +2,13 @@ import { beforeEach, describe, expect, test } from "bun:test";
 import {
   AppContainer,
   AppLifecycle,
+  createInjectionDecorator,
   InjectionToken,
+  loadModule,
   Module,
+  overrideInjectionContainerForTest,
   PluginManager,
   type Token,
-  createInjectionDecorator,
-  loadModule,
-  overrideInjectionContainerForTest,
 } from "@zenject/core";
 import { container } from "tsyringe";
 

@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, test } from "bun:test";
 import {
   AppContainer,
-  InjectionToken,
-  type Token,
   createIsolatedContainer,
   createScope,
+  InjectionToken,
+  type Token,
 } from "@zenject/core";
 
 class RootService {

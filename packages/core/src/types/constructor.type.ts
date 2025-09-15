@@ -4,16 +4,11 @@
  */
 
 /**
- * Represents a generic constructor type.
+ * Represents a generic constructor type that accepts any parameters
+ * Similar to NestJS approach for maximum flexibility
  * @template T The type of object created by the constructor
- * @typedef {Function} Constructor
- * @example
- * // Using Constructor as a type parameter
- * function createInstance<T>(ctor: Constructor<T>): T {
- *   return new ctor();
- * }
- *
- * // Using Constructor as a variable type
- * const userClass: Constructor<User> = User;
  */
-export type Constructor<T = unknown> = new (...args: unknown[]) => T;
+export type Constructor<T = unknown> = {
+  new (...args: never[]): T;
+  prototype: T;
+};

@@ -2,6 +2,7 @@
   "name": "@zenject/core",
   "description": "A core module for Zenject",
   "type": "module",
+  "main": "src/index.ts",
   "author": "Yoann Vanitou",
   "license": "MIT",
   "engines": {
@@ -10,8 +11,5 @@
   "dependencies": {
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.10.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
   }
 }

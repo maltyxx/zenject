@@ -21,10 +21,13 @@ import type { Token } from "./token.type";
  *   useValue: 'abc123'
  * };
  *
- * // Factory provider - create instances with custom logic
+ * // Factory provider - create instances with custom logic (sync or async)
  * const factoryProvider: FactoryProvider<DbConnection> = {
  *   provide: DbConnection,
- *   useFactory: (config) => new DbConnection(config.url),
+ *   useFactory: async (config) => {
+ *     const connection = await createConnection(config.url);
+ *     return connection;
+ *   },
  *   deps: ['DB_CONFIG']
  * };
  */
@@ -53,12 +56,13 @@ export interface ValueProvider<T = unknown> {
 
 /**
  * Provider that maps a token to a factory function.
+ * Supports both synchronous and asynchronous factories (like NestJS).
  */
 export interface FactoryProvider<T = unknown> {
   /** Token that identifies the dependency */
   provide: Token<T>;
-  /** Factory function to call for creating the dependency */
-  useFactory: (...args: unknown[]) => T;
+  /** Factory function to call for creating the dependency (sync or async) */
+  useFactory: (...args: unknown[]) => T | Promise<T>;
   /** Optional list of dependencies for the factory */
   deps?: Token<unknown>[];
 }
@@ -74,7 +78,7 @@ export interface ExistingProvider<T = unknown> {
 }
 
 /**
- * Union type of all provider types.
+ * Union type of all provider types - flexible like NestJS
  */
 export type Provider<T = unknown> =
   | Constructor<T>

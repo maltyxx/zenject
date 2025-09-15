@@ -1,6 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { InjectionToken } from "@zenject/core";
-import { Scope } from "@zenject/core";
+import { InjectionToken, Scope } from "@zenject/core";
 
 describe("InjectionToken", () => {
   test("toString outputs description", () => {

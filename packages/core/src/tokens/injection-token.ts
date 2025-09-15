@@ -1,20 +1,5 @@
-import { Scope } from "../types/scope.enum";
-
-/**
- * Options for InjectionToken
- */
-export interface InjectionTokenOptions {
-  /**
-   * The scope of the token
-   * @default Scope.SINGLETON
-   */
-  scope?: Scope;
-
-  /**
-   * Description for debugging
-   */
-  description: string;
-}
+import type { InjectionTokenOptions } from "../types/injection-token-options.type.js";
+import { Scope } from "../types/scope.enum.js";
 
 /**
  * A class that represents a token for dependency injection.
@@ -36,7 +21,7 @@ export interface InjectionTokenOptions {
  * // Providing a value for the token
  * AppContainer.register(API_URL, { useValue: 'https://api.example.com' });
  */
-export class InjectionToken<T = unknown> {
+export class InjectionToken<_T = unknown> {
   /**
    * The scope of this token
    */

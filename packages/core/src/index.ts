@@ -2,39 +2,42 @@
  * @module zenject
  * @description A lightweight dependency injection framework inspired by Angular's DI system
  */
+import { inject } from "tsyringe";
+import type { InjectionToken } from "./tokens/injection-token.js";
 
-// Core
-export * from "./zenject";
-export * from "./container";
-export * from "./decorators/module";
-export * from "./decorators/injection-helpers";
-export * from "./interfaces/lifecycle";
-export * from "./types/constructor.type";
-export * from "./types/module-options.interface";
-export * from "./types/dynamic-module.interface";
-export * from "./types/provider.interface";
-export * from "./types/token.type";
+export {
+  container,
+  type DependencyContainer,
+  injectable as Injectable,
+  singleton as Singleton,
+} from "tsyringe";
 
+export function Inject<T>(
+  token: InjectionToken<T> | string | symbol,
+): ParameterDecorator {
+  return inject(token as never);
+}
+
+export * from "./container.js";
+export * from "./decorators/injection-helpers.js";
+export * from "./decorators/module.js";
+export * from "./interfaces/lifecycle.js";
+export * from "./interfaces/plugin.interface.js";
 // Lifecycle
-export * from "./lifecycle/app-lifecycle";
-
+export * from "./lifecycle/app-lifecycle.js";
 // Plugins
-export * from "./plugins/plugin-manager";
-
+export * from "./plugins/plugin-manager.js";
+export * from "./tokens/common-tokens.js";
 // Tokens
-export * from "./tokens/injection-token";
-export * from "./tokens/common-tokens";
+export * from "./tokens/injection-token.js";
+export * from "./types/constructor.type.js";
+export * from "./types/dynamic-module.interface.js";
+export * from "./types/module-options.interface.js";
+export * from "./types/provider.interface.js";
 
 // Export all interfaces and types for better developer experience
-export * from "./types/scope.enum";
-export * from "./interfaces/plugin.interface";
-export * from "./utils/type-helpers";
-
-// Re-export injectable decorator from tsyringe for convenience
-export {
-  injectable,
-  inject,
-  singleton,
-  type DependencyContainer,
-  container,
-} from "tsyringe";
+export * from "./types/scope.enum.js";
+export * from "./types/token.type.js";
+export * from "./utils/type-helpers.js";
+// Core
+export * from "./zenject.js";

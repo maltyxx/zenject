@@ -1,6 +1,5 @@
-import { container } from "tsyringe";
 import type { DependencyContainer } from "tsyringe";
-import { container as containerImpl } from "tsyringe";
+import { container, container as containerImpl } from "tsyringe";
 
 /**
  * @module container
