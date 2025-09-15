@@ -66,7 +66,9 @@ describe("ConfigService", () => {
 
       mockYamlService.importFile.mockResolvedValue(yamlData);
 
-      const result = await configService.loadConfig(TestConfig);
+      const result = await configService.loadConfig(TestConfig, {
+        filePath: "config.yaml",
+      });
 
       expect(result).toEqual({
         name: "production",
@@ -168,7 +170,9 @@ describe("ConfigService", () => {
 
       mockYamlService.importFile.mockResolvedValue(yamlData);
 
-      const result = await configService.loadConfig(TestConfig);
+      const result = await configService.loadConfig(TestConfig, {
+        filePath: "config.yaml",
+      });
 
       expect(result).toEqual({
         port: 8080,
@@ -211,7 +215,9 @@ describe("ConfigService", () => {
       const [result1, result2] = await configService.loadMultipleConfigs([
         Config1,
         Config2,
-      ]);
+      ], {
+        filePath: "config.yaml",
+      });
 
       expect(result1).toEqual({ value: "loaded1" });
       expect(result2).toEqual({ value: "loaded2" });
