@@ -5,11 +5,14 @@
 	"dockerFile": "Dockerfile",
 	// Configure tool-specific properties.
 	"customizations": {
-	  // Configure properties specific to VS Code.
-	  "vscode": {
-		// Add the IDs of extensions you want installed when the container is created.
-		"extensions": ["oven.bun-vscode", "biomejs.biome"]
-	  }
-	}
-  }
-  
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"oven.bun-vscode",
+				"biomejs.biome"
+			]
+		}
+	},
+	"postCreateCommand": ".devcontainer/post-install.sh"
+}

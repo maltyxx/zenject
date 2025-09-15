@@ -1,5 +1,0 @@
-preload = ["reflect-metadata"]
-
-[test]
-preload = ["reflect-metadata"]
-coverageThreshold = 0.9

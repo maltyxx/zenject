@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, mock, test } from "bun:test";
-import { LOGGER_LOGGER_TOKEN, type Logger } from "@zenject/logger";
+import { LOGGER_TOKEN, type Logger } from "@zenject/logger";
 import { createTestContext } from "@zenject/testing";
+import { appConfig } from "./app.config";
 import { AppService } from "./app.service";
 
 describe("AppService", () => {
@@ -8,17 +9,27 @@ describe("AppService", () => {
   let loggerMock: Logger;
 
   beforeEach(async () => {
-    // Create logger mock with mock functions
     loggerMock = {
+      trace: mock(() => {}),
+      warn: mock(() => {}),
+      fatal: mock(() => {}),
+      silent: mock(() => {}),
       debug: mock(() => {}),
       info: mock(() => {}),
       error: mock(() => {}),
-      child: mock((bindings: Record<string, unknown>) => loggerMock),
+      child: mock((_bindings: Record<string, unknown>) => loggerMock),
+    };
+
+    const mockConfig = {
+      environment: "development" as const,
     };
 
     const { resolve } = await createTestContext({
       providers: [AppService],
-      overrides: [{ provide: LOGGER_LOGGER_TOKEN, useValue: loggerMock }],
+      overrides: [
+        { provide: LOGGER_TOKEN, useValue: loggerMock },
+        { provide: appConfig.KEY, useValue: mockConfig },
+      ],
     });
 
     appService = resolve(AppService);
@@ -27,7 +38,10 @@ describe("AppService", () => {
   test("helloWorld should call logger.info with 'Hello, world!'", () => {
     appService.helloWorld();
 
-    expect(loggerMock.info).toHaveBeenCalledWith("Hello, world!");
+    expect(loggerMock.info).toHaveBeenCalledWith(
+      { config: { environment: "development" } },
+      "Hello, world!"
+    );
     expect(loggerMock.info).toHaveBeenCalledTimes(1);
   });
 });

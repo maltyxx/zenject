@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.4/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -7,8 +7,9 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      "packages/cli/src/templates/*.template.ts"
+    "includes": [
+      "**",
+      "!**/packages/cli/src/templates/**/*.template.ts"
     ]
   },
   "formatter": {
@@ -18,8 +19,12 @@
     "lineWidth": 80,
     "lineEnding": "lf"
   },
-  "organizeImports": {
-    "enabled": true
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "linter": {
     "enabled": true,
@@ -32,16 +37,8 @@
       },
       "style": {
         "useConsistentArrayType": "error",
-        "useShorthandArrayType": "error",
         "noImplicitBoolean": "error",
-        "useImportType": "error"
-      },
-      "complexity": {
-        "noStaticOnlyClass": "off",
-        "useLiteralKeys": "error",
-        "noUselessFragments": "error"
-      },
-      "nursery": {
+        "useImportType": "off",
         "useConsistentMemberAccessibility": {
           "level": "error",
           "options": {
@@ -49,6 +46,12 @@
           }
         }
       },
+      "complexity": {
+        "noStaticOnlyClass": "off",
+        "useLiteralKeys": "error",
+        "noUselessFragments": "error"
+      },
+      "nursery": {},
       "a11y": {
         "useButtonType": "error"
       }

@@ -1,20 +1,20 @@
 {
   "name": "@maltyxx/zenject",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A lightweight dependency injection framework for Bun.js applications",
   "type": "module",
   "workspaces": [
     "packages/*",
-    "examples/*"
+    "apps/*"
   ],
   "scripts": {
+    "dev": "bun run --watch apps/hello-world/src/main.ts",
+    "build": "bun build ./apps/hello-world/src/main.ts --format=esm --target=bun --outdir=dist --minify --sourcemap=external",
     "test": "bun test",
     "test:watch": "bun test --watch",
     "test:cov": "bun test --coverage",
-    "typecheck": "tsc --noEmit",
-    "lint": "biome check packages examples",
-    "lint:fix": "biome check --apply packages examples",
-    "format": "biome format --write --verbose packages examples"
+    "lint": "biome check --write packages apps",
+    "format": "biome format --write --verbose packages apps"
   },
   "keywords": [
     "bun",
@@ -28,15 +28,17 @@
   "author": "Yoann Vanitou",
   "license": "MIT",
   "engines": {
-    "bun": ">=1.0.0"
+    "bun": ">=1.2.0"
   },
   "dependencies": {
-    "reflect-metadata": "^0.2.1"
+    "@zenject/config": "workspace:*",
+    "@zenject/core": "workspace:*",
+    "@zenject/logger": "workspace:*",
+    "@zenject/testing": "workspace:*"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@types/bun": "^1.2.10",
-    "typescript": "^5.3.3"
+    "@biomejs/biome": "2.1.4",
+    "@types/bun": "^1.2.22"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
